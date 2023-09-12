@@ -16,10 +16,10 @@
       name: mongod
       enabled: yes
   
-   - name: starting the mongodb
-    ansible.builtin.service:
-      name: mongod
-      state: started
+  - name: starting the mongodb
+  ansible.builtin.service:
+    name: mongod
+    state: started
   - name: replacing 127.0.0.1 by 0.0.0.0
     ansible.builtin.replace:
       path: /etc/mongod.conf
