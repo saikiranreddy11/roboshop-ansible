@@ -7,7 +7,7 @@
       src: /home/centos/roboshop-ansible/mongodb.repo
       dest: /etc/yum.repos.d/mongo.repo
   - name: installing the mongodb
-    ansible.buitin.yum:
+    ansible.builtin.yum:
       name: mongodb-org
       state: installed
 
