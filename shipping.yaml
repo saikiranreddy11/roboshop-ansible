@@ -62,21 +62,21 @@
       daemon_reload: true
       name: shipping
 
-    - name: enabling the shipping
-      ansible.builtin.service:
-        name: shipping
-        enabled: yes
-        state: restarted
+  - name: enabling the shipping
+    ansible.builtin.service:
+      name: shipping
+      enabled: yes
+      state: restarted
 
-    - name: installing mysql
-      ansible.builtin.yum:
-        name: mysql
-        state: installed
+  - name: installing mysql
+    ansible.builtin.yum:
+      name: mysql
+      state: installed
 
-    - name: loading the schema
-      ansible.builtin.command: mysql -h mysql.saikiransudhireddy.com -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+  - name: loading the schema
+    ansible.builtin.command: mysql -h mysql.saikiransudhireddy.com -uroot -pRoboShop@1 < /app/schema/shipping.sql 
 
-    - name: restarting the shipping
-      ansible.builtin.service:
-        name: shipping
-        state: restarted
+  - name: restarting the shipping
+    ansible.builtin.service:
+      name: shipping
+      state: restarted
