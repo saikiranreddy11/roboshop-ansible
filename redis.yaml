@@ -9,10 +9,10 @@
       baseurl: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
       state: present
   
-  - name: enabling the required package
-    ansible.builtin.yum:
-      name: remi
-      enablerepo: "redis:remi-6.2"
+  - name: Enable the remi 6.2 module
+  ansible.builtin.service:
+    name: redis:remi-6.2
+    enabled: yes
 
   - name: installing redis
     ansible.builtin.yum:
