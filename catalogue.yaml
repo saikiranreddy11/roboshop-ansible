@@ -1,0 +1,38 @@
+- name: This is configuring the catalogue service
+  hosts: catalogue
+  become: yes
+  tasks:
+  - name: installing the nodejs repos
+    ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+  
+  - name: installing the nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: installed
+  
+   - name: checking the user
+    ansible.builtin.command: id roboshop
+    register: output
+    ignore_errors: true
+
+
+  - name: Creating the user
+    ansible.builtin.user:
+      name: roboshop
+      state: present    
+    when: output.rc != 0
+  
+   - name: Check if the directory exists
+    ansible.builtin.stat:
+      path: /app
+      register  : dir_check
+
+  - name: Create the directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+    when: dir_check.stat.exists == False
+
+
+  #  - name: installing the application code
+  #   ansible.builtin.shell: curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
