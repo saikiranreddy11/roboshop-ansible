@@ -12,8 +12,8 @@
   
   - name: checking the user
     ansible.builtin.command: id roboshop
-    register: output
-    ignore_errors: true
+      register: output
+      ignore_errors: true
 
 
   - name: Creating the user
@@ -26,7 +26,7 @@
     ansible.builtin.stat:
       path: /app
       register: dir_check
-      #ignore_errors: true
+    ignore_errors: true
 
   - name: printing the output
     ansible.builtin.debug:
