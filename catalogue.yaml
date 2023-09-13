@@ -25,7 +25,7 @@
   - name: Check if the directory exists
     ansible.builtin.stat:
       path: /app
-      register: dir_check
+    register: dir_check
     ignore_errors: true
 
   - name: printing the output
