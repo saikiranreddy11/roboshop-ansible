@@ -21,3 +21,6 @@ mysql.saikiransudhireddy.com
 
 [shipping]
 shipping.saikiransudhireddy.com
+
+[rabbitmq]
+rabbitmq.saikiransudhireddy.com
