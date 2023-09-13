@@ -38,4 +38,13 @@
       name: redis
       state: installed
 
-  
+  - name: replacing 127.0.0.1 by 0.0.0.0
+      ansible.builtin.replace:
+        path: /etc/redis.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'  
+  - name: enabling the redis and starting
+      ansible.builtin.service:
+        name: mongod
+        enabled: yes
+        state: restarted
