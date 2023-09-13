@@ -38,9 +38,13 @@
   - name: Download the catalogue files
     ansible.builtin.get_url:
       url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-      dest: /tmp/catalogue.zip
+      dest: /tmp
   
-  - name: Change the working directory to somedir/ before executing the command
-    ansible.builtin.shell:
-    args:
-      chdir: /app
+  - name: Unarchive a file that is already on the remote machine
+    ansible.builtin.unarchive:
+      src: /tmp/catalogue.zip
+      dest: /app
+  - name: Install "coffee-script" node.js package.
+    community.general.npm:
+      name: npm
+      path: /app
