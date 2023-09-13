@@ -67,18 +67,6 @@
       enabled: yes
       state: restarted
 
-  - name: setting up the mongodb repo file
-    ansible.builtin.copy:
-      src: /home/centos/roboshop-ansible/mongodb.repo
-      dest: /etc/yum.repos.d/mongo.repo
-
-  - name: installing the mongodbshell
-    ansible.builtin.yum:
-      name: mongodb-org-shell
-      state: installed
-
-  - name: loading the schema
-    ansible.builtin.command: mongo --host mongodb.saikiransudhireddy.com < /app/schema/cart.js
      
 
   
