@@ -28,15 +28,12 @@
     register: dir_check
     ignore_errors: true
 
-  - name: printing the output
-    ansible.builtin.debug:
-      msg: "{{dir_check}}"
 
-  # - name: Create the directory
-  #   ansible.builtin.file:
-  #     path: /app
-  #     state: directory
-  #   when: dir_check.stat.exists == False
+  - name: Create the directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+    when: dir_check.stat.exists == False
 
 
   #  - name: installing the application code
