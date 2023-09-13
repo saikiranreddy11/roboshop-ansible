@@ -23,9 +23,9 @@
     when: output.rc != 0
   
   - name: Check if the directory exists
-  ansible.builtin.stat:
-    path: /app
-    register  : dir_check
+    ansible.builtin.stat:
+      path: /app
+      register  : dir_check
 
   - name: printing the output
     ansible.builtin.debug:
