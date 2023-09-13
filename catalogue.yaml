@@ -52,20 +52,20 @@
   
   - name: copying the catalogue.service
     ansible.builtin.copy:
-    src: /home/centos/roboshop-ansible/catalogue.service
-    dest: /etc/systemd/system/catalogue.service
+      src: /home/centos/roboshop-ansible/catalogue.service
+      dest: /etc/systemd/system/catalogue.service
 
   
   - name: Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes
     ansible.builtin.systemd:
-    daemon_reload: true
-    name: catalogue
+      daemon_reload: true
+      name: catalogue
 
   - name: enabling the catalogue
     ansible.builtin.service:
-    name: catalogue
-    enabled: yes
-    state: started
+      name: catalogue
+      enabled: yes
+      state: started
 
   - name: setting up the mongodb repo file
     ansible.builtin.copy:
@@ -74,8 +74,8 @@
 
   - name: installing the mongodbshell
     ansible.builtin.yum:
-    name: mongodb-org-shell
-    state: installed
+      name: mongodb-org-shell
+      state: installed
 
   - name: checking the user
     ansible.builtin.command: mongo --host mondodb.saikiransudhireddy.com < /app/schema/catalogue.js
