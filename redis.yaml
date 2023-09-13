@@ -11,7 +11,7 @@
   
   - name: Enable the remi 6.2 module
     ansible.builtin.service:
-      name: redis:remi-6.2
+      name: remi-6.2
       enabled: yes
 
   - name: installing redis
