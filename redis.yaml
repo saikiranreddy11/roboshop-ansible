@@ -8,6 +8,7 @@
       baseurl: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
       state: present
       description: This is the step of installing the remirepo
+      enabled: yes
       
   
   - name: Enable the remi 6.2 module
