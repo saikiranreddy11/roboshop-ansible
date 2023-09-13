@@ -27,7 +27,7 @@
 
   - name: Create the directory
     ansible.builtin.file:
-      path: /usr/share/nginx/html
+      path: /usr/share/nginx/html 
       state: directory
     when: dir_check.stat.exists == False 
   
