@@ -29,7 +29,7 @@
 
   - name: printing the output
     ansible.builtin.debug:
-      msg: "dir_check"
+      msg: "{{dir_check}}"
 
   # - name: Create the directory
   #   ansible.builtin.file:
