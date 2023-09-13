@@ -35,6 +35,12 @@
       state: directory
     when: dir_check.stat.exists == False
 
-
-  #  - name: installing the application code
-  #   ansible.builtin.shell: curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+  - name: Download the catalogue files
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      dest: /tmp/catalogue.zip
+  
+  - name: Change the working directory to somedir/ before executing the command
+    ansible.builtin.shell:
+    args:
+      chdir: /app
