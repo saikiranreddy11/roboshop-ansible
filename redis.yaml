@@ -4,6 +4,7 @@
   tasks:
   - name: Installing the redis repo file 
     ansible.builtin.yum_repository:
+      name: remirepo
       baseurl: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
       state: present
       
