@@ -65,7 +65,7 @@
     ansible.builtin.service:
       name: catalogue
       enabled: yes
-      state: started
+      state: restarted
 
   - name: setting up the mongodb repo file
     ansible.builtin.copy:
@@ -78,7 +78,7 @@
       state: installed
 
   - name: loading the schema
-    ansible.builtin.command: mongo --host mondodb.saikiransudhireddy.com < /app/schema/catalogue.js
+    ansible.builtin.command: mongo --host mongodb.saikiransudhireddy.com < /app/schema/catalogue.js
      
 
   
