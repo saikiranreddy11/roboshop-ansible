@@ -10,9 +10,8 @@
       state: present
   
   - name: Enable the remi 6.2 module
-    ansible.builtin.service:
-      name: remi-6.2
-      enabled: yes
+    ansible.builtin.command: yum module enable redis:remi-6.2 -y
+
 
   - name: installing redis
     ansible.builtin.yum:
