@@ -15,9 +15,24 @@
 
   - name: Removing the default nginx files
     ansible.builtin.file:
-      path: /usr/share/nginx/html/*
+      path: /usr/share/nginx/html
       state: absent
-  - name: Download the catalogue files
+
+  - name: Check if the directory exists
+    ansible.builtin.stat:
+      path: /usr/share/nginx/html
+    register: dir_check
+    ignore_errors: true
+
+
+  - name: Create the directory
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: directory
+    when: dir_check.stat.exists == False 
+  
+
+  - name: Download the web files
     ansible.builtin.get_url:
       url:  https://roboshop-builds.s3.amazonaws.com/web.zip
       dest: /tmp/web.zip
