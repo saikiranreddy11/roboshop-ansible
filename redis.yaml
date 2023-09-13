@@ -7,6 +7,6 @@
       name: remi
       description: redis remi repo
       baseurl: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
-      state: installed
+      state: present
 
   
