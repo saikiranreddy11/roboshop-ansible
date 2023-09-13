@@ -1,0 +1,11 @@
+- name: This is the configurattion for redis server
+  hosts: redis
+  become: yes
+  tasks:
+  - name: Installing the redis repo file 
+    ansible.builtin.yum_repository:
+      name: remi
+      description: redis remi repo
+      baseurl: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+  
