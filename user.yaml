@@ -1,0 +1,84 @@
+- name: This is configuring the user service
+  hosts: user
+  become: yes
+  tasks:
+  - name: installing the nodejs repos
+    ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+  
+  - name: installing the nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: installed
+  
+  - name: checking the user
+    ansible.builtin.command: id roboshop
+    register: output
+    ignore_errors: true
+
+
+  - name: Creating the user
+    ansible.builtin.user:
+      name: roboshop
+      state: present    
+    when: output.rc != 0
+  
+  - name: Check if the directory exists
+    ansible.builtin.stat:
+      path: /app
+    register: dir_check
+    ignore_errors: true
+
+
+  - name: Create the directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
+    when: dir_check.stat.exists == False
+
+  - name: Download the user files
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/user.zip
+      dest: /tmp
+  
+  - name: Unarchive a file that is already on the remote machine
+    ansible.builtin.unarchive:
+      src: /tmp/user.zip
+      dest: /app
+      remote_src: yes
+  - name: Installing npm dependencies
+    community.general.npm:
+      name: npm
+      path: /app
+  
+  - name: copying the user.service
+    ansible.builtin.copy:
+      src: /home/centos/roboshop-ansible/user.service
+      dest: /etc/systemd/system/user.service
+
+  
+  - name: daemon reload user
+    ansible.builtin.systemd:
+      daemon_reload: true
+      name: user
+
+  - name: enabling the user
+    ansible.builtin.service:
+      name: user
+      enabled: yes
+      state: restarted
+
+  - name: setting up the mongodb repo file
+    ansible.builtin.copy:
+      src: /home/centos/roboshop-ansible/mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: installing the mongodbshell
+    ansible.builtin.yum:
+      name: mongodb-org-shell
+      state: installed
+
+  - name: loading the schema
+    ansible.builtin.command: mongo --host mongodb.saikiransudhireddy.com < /app/schema/user.js
+     
+
+  
