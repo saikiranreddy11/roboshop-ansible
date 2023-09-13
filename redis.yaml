@@ -45,6 +45,6 @@
       replace: '0.0.0.0'  
   - name: enabling the redis and starting
     ansible.builtin.service:
-      name: mongod
+      name: redis
       enabled: yes
       state: restarted
