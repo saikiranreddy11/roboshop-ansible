@@ -49,9 +49,10 @@
       chdir: /app
 
   - name: copying the service file
-    ansible.buitlin.copy:
+    ansible.builtin.copy:
       src: /home/centos/roboshop-ansible/payment.service
       dest: /etc/systemd/system/payment.service
+
   - name: daemon reload payment
     ansible.builtin.systemd:
       daemon_reload: true
