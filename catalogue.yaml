@@ -77,7 +77,8 @@
       name: mongodb-org-shell
       state: installed
 
-  - name: checking the user
+  - name: loading the schema
     ansible.builtin.command: mongo --host mondodb.saikiransudhireddy.com < /app/schema/catalogue.js
+      remote_src: yes
 
   
