@@ -11,7 +11,7 @@
   
   - name: enabling the required package
     ansible.builtin.yum:
-      name: redis
+      name: remi
       enablerepo: "redis:remi-6.2"
 
   - name: installing redis
