@@ -56,7 +56,7 @@
       dest: /etc/systemd/system/catalogue.service
 
   
-  - name: Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes
+  - name: daemon reload catalogue
     ansible.builtin.systemd:
       daemon_reload: true
       name: catalogue
@@ -79,6 +79,6 @@
 
   - name: loading the schema
     ansible.builtin.command: mongo --host mondodb.saikiransudhireddy.com < /app/schema/catalogue.js
-      remote_src: yes
+     
 
   
