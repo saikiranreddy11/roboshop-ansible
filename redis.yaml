@@ -4,16 +4,19 @@
   tasks:
   - name: Installing the redis repo file 
     ansible.builtin.yum:
-      name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
-      state: installed
+      name: remi
+      description: redis remi repo
+      baseurl: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      state: present
   
-  - name: enabling the remi 6.2
+  - name: enabling the required package
     ansible.builtin.yum:
       name: redis
       enablerepo: "redis:remi-6.2"
 
-  - name: installing the selected redis
+  - name: installing redis
     ansible.builtin.yum:
       name: redis
-      state: installed 
-       
+      state: installed
+
+  
