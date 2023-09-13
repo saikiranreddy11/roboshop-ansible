@@ -1,0 +1,39 @@
+- name: This is configuring the web service
+  hosts: web
+  become: yes
+  tasks:
+  - name: installing nginx
+    ansible.builtin.yum:
+      name: nginx
+      state: installed
+
+  - name: enabling the nginx
+    ansible.builtin.service:
+      name: web
+      enabled: yes
+      state: started
+
+  - name: Removing the default nginx files
+    ansible.builtin.file:
+      path: /usr/share/nginx/html/*
+      state: absent
+  - name: Download the catalogue files
+    ansible.builtin.get_url:
+      url:  https://roboshop-builds.s3.amazonaws.com/web.zip
+      dest: /tmp/web.zip
+  - name: Unarchive a file that is already on the remote machine
+    ansible.builtin.unarchive:
+      src: /tmp/web.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes   
+  - name: copying the reverse configuration files
+    ansible.builtin.copy:
+      src: /home/centos/roboshop-ansible/roboshop.conf
+      dest: /etc/nginx/default.d/roboshop.conf
+  - name: restarting the nginx
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
+
+  
+
